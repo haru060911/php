@@ -1,7 +1,7 @@
 <?php
 require_once '../DbManager.php';
 require_once '../selfphp/Encode.php';
-
+session_start();
 
 try {
   // データベースへの接続を確立
@@ -12,11 +12,13 @@ try {
   // insert into table名（列名） values(列名)
   // :列名 プレースホルダー 名前は自由
   // プレースホルダーはそのあとのbindValue()のところで当てはめる
-  $stt = $db->prepare('INSERT INTO memo(memo,now,user) VALUES(:memo,:now,:user)');
+
+  // $stt = $db->prepare('INSERT INTO memo(memo,now,user) VALUES(:memo,:now,:user)');
+  $stt = $db->prepare('INSERT INTO memo(memo,now) VALUES(:memo,:now)');
   // memoのカラムにPOSTで取得したテキストを入れる
   $stt->bindValue(':memo', $_POST['memo']);
   $stt->bindValue(':now', $_POST['now']);
-  $stt->bindValue(':user', $_POST['user']);
+  // $stt->bindValue(':user', $_POST['user']);
   // INSERT命令を実行
   $stt->execute();
 

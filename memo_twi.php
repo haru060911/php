@@ -1,6 +1,8 @@
 <?php
 require_once '../DbManager.php';
 require_once '../selfphp/Encode.php';
+session_start();
+$_SESSION['id'] = $_POST['id'];
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +50,7 @@ require_once '../selfphp/Encode.php';
         #tweet_button {
             font-size: 30px;
             color: #00acee;
-            transform:rotate(45deg);
+            transform: rotate(45deg);
         }
 
         #twi_container {
@@ -80,12 +82,15 @@ require_once '../selfphp/Encode.php';
 <body>
     <div id="tweet_area">
         <form method="POST" action="memo_twi2.php" id="form">
-            <div id="userbox">
-                <img src="../php/kuma.png" alt="icon">
-                <div id="user">
+            <!-- <div id="userbox"> -->
+
+            <img src="../php/kuma.png" alt="icon">
+            <?php print $_SESSION['id']; ?>
+            
+            <!-- <div id="user">
                     <input type="text" id="user" name="user">
                 </div>
-            </div>
+            </div> -->
             <div id="tweet">
                 <p>つい～と</p>
                 <textarea name="memo" id="memo" cols="40" rows="4"></textarea>
@@ -122,7 +127,7 @@ require_once '../selfphp/Encode.php';
                 <div id="twi_container">
                     <div id="user_name">
                         <img src="../php/kuma.png" alt="icon">
-                        <?= e($row['user']) ?>
+                        <?php print $_SESSION['id']; ?>
                     </div>
                     <div id="memo">
                         <?= e($row['memo']) ?>
